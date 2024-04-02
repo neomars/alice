@@ -1,0 +1,37 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<script>
+function spinner() {
+  var x = document.getElementById("mySpinner");
+  var y = document.getElementById("mySubmit");
+  if (x.style.display === "none") {
+    y.style.display = "none";
+    x.style.display = "block";
+  } else {
+    y.style.display = "block";
+    x.style.display = "none";
+  }
+}
+</script>
+
+{{ form_start(form, { 'action': path('app_resume'), 'method': 'POST' }) }}
+    <div class="form-group">
+    {% for generatetext_with_extension in generatetext_extension %}
+        {% set extension = generatetext_with_extension|split('.') %}
+        {% if extension[1] == "txt" %}
+                <input type="hidden" id="resume_text" name="resume[text]" value="{{ path }}{{ generatetext_with_extension }}" >
+        {% endif %}
+    {% endfor %}
+    {{ form_widget(form.prompt, {'attr': {'class': 'form-control', 'data': prompt }}) }}
+    <div id="mySubmit">
+        <button class="btn btn-success" onclick="spinner()">{{ button_label|default('Résume le document') }}</button>
+    </div>
+    <div id="mySpinner" style="display:none;">
+        <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Traitement en cours...
+        </button>
+    </div>
+
+  </div>
+
+{{ form_end(form) }}

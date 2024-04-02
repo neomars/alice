@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Whisper - Aide{% endblock %}
+{% block body %}
+  <p>ALICE est un modèle de reconnaissance vocale à usage général. Il est entraîné sur un grand ensemble de données audio diverses et est également un modèle multitâche qui peut effectuer la reconnaissance de la parole multilingue, la traduction de la parole et l'identification de la langue.</p>
+  <p>source : <a href="https://github.com/openai/whisper">openai</a> - <a href="https://github.com/pyannote/pyannote-audio">pyannote</a> - <a href="https://github.com/m-bain/whisperX/tree/main">whisperx</a> </p>
+  <p>Pour vous faciliter l'utilisation, nous avons effectué quelques réglages par défaut.</p>
+
+              <h2>Commandes et réglage</h2>
+         
+              <p>Vous avez le choix entre deux <strong>tâches</strong>. La <strong>transcription</strong> qui transformera votre document audio ou viéo en texte. Et la <strong>traduction</strong> qui effectura une transcription puis une traduction en anglais.</p>
+              <p>Le choix du langage vous fera gagner du temps. Si votre document est en français, il faut indiquer <strong>fr</strong> dans la partie <strong>langue</strong> du formulaire. Vous ferez gagner du temps de calcul au programme qui ne sera pas obliger de deviner la langue utilisée.</p>
+              <p>Les modèles sont réparties en deux catégories. Les <strong>.en</strong> et les modèles internationaux. Veuillez choisir les <strong>.en</strong> si votre document est en anglais. Le résultat en sera meilleur.</p>
+         <h2>Prompt</h2>
+          
+              <p>
+              Le "prompt" regroupe les instructions qui permettent à une IA (intelligence artificielle) de traiter la demande qui lui est faite.
+              <br>
+              Dans la case "prompt", vous pouvez indiquer les accronymes, si il s'agit d'un ou de plusieurs protagonistes, si un accent est présent, etc... Le langage du prompt est l'anglais.
+              <br>
+              Voici un exemple de prompt pour un texte qui traite des UFR à l'Université Rennes 2 : Rennes2, UFR is "Unité de Formation et de Recherche".
+              <br>
+              Plus d'exemple sur <a href="https://github.com/alphacep/whisper-prompts">whisper-prompts</a>.
+              </p>
+              
+          <h2>5 modèles différents</h2>
+          
+            <p>Il existe cinq tailles de modèles, dont quatre avec des versions en anglais uniquement, offrant des compromis en termes de vitesse et de précision. Vous trouverez ci-dessous les noms des modèles disponibles, leurs besoins approximatifs en mémoire et leur vitesse d'inférence par rapport au grand modèle. La vitesse réelle peut varier en fonction de nombreux facteurs, y compris le matériel disponible.
+                </p>    
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Taille</th>
+                        <th scope="col">Paramètres</th>
+                        <th scope="col">Modèle anglais seulement</th>
+                        <th scope="col">Modèle multilingue</th>
+                        <th scope="col">VRAM requis</th>
+                        <th scope="col">Vitesse relative</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">tiny</th>
+                            <td>39 M</td>
+                            <td>tiny.en</td>
+                            <td>tiny</td>
+                            <td>~1 GB</td>
+                            <td>~32x</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">base</th>
+                            <td>74 M</td>
+                            <td>base.en</td>
+                            <td>base</td>
+                            <td>~1 GB</td>
+                            <td>~16x</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">small</th>
+                            <td>244 M</td>
+                            <td>small.en</td>
+                            <td>small</td>
+                            <td>~2 GB</td>
+                            <td>~6x</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">medium</th>
+                            <td>769 M</td>
+                            <td>medium.en</td>
+                            <td>medium</td>
+                            <td>~5 GB</td>
+                            <td>~2x</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">large</th>
+                            <td>1550 M</td> 
+                            <td>N/A</td> 
+                            <td>large</td>
+                            <td>~10 GB</td>
+                            <td>1x</td>
+                        </tr>
+                    </tbody>
+                </table>
+                  </div><h2>Performances</h2>
+          
+              <p>Le .en les modèles pour les applications en anglais seulement ont tendance à mieux fonctionner, en particulier pour tiny.en et base.en modèles. Nous avons observé que la différence devient moins significative pour le small.en et medium.en modèles. 
+Les performances de Whisper varient considérablement en fonction de la langue. La figure ci-dessous montre une ventilation des performances de large-v3 et large-v2 modèles par langue, en utilisant WERs (taux d'erreur de mots) ou CER (taux d'erreur de caractères, indiqué dans Italique) évalué sur les jeux de données Common Voice 15 et Fleurs. Des métriques WER/CER supplémentaires correspondant aux autres modèles et ensembles de données peuvent être trouvées dans les annexes D.1, D.2 et D.4 de <a href="https://arxiv.org/abs/2212.04356">le papier</a>, ainsi que les scores BLEU (Bilingual Evaluation Understudy) pour la traduction à l'annexe D.3.
+              </p>
+              <p>
+              <img src="{{ '/images/perfs.png' }}" width="600" height="auto" alt="Perfs">
+              </p>
+    
+{% endblock %}

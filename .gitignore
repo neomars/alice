@@ -1,0 +1,35 @@
+### Symfony ###
+
+#migrations
+/migrations/
+
+#translations
+/translations/
+
+#uploads
+public/uploads/files/
+
+# Cache, session files and logs (Symfony3)
+/var/
+/var/*
+
+# Managed by Composer
+/bin/
+/vendor/
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+
+# Build data
+/public/build/
+
+# Ignorer tous les fichiers .log .db
+*.log
+*.db
+/node_modules/
+composer.lock
+package-lock.json
+phpunit.xml.dist
+symfony.lock
+.DS_Store

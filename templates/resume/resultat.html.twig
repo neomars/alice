@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document traité{% endblock %}
+
+{% block body %}
+    <div class="row m-2 border border-3">
+        <h3>Résultat de votre commande</h3>
+        <br>  
+        <h4>Commande</h4> 
+        <br>
+        {{ resume }}
+        <br>
+        <h4>Resultat</h4>
+        <br>
+        {{ result|replace({"\n": " \n"})|nl2br }}
+        <br>
+        <h4>Texte original</h4>
+            {{ text|nl2br }}
+    </div>
+{% endblock %}

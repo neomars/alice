@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document traité{% endblock %}
+
+{% block body %}
+<div class="row m-2 border border-3">
+  <div class="col-md-auto d-flex align-items-top">
+    {% for generatetext_with_extension in generatetext_extension %}
+        {% set extension = generatetext_with_extension|split('.') %}
+        {% if extension[1] == 'vtt' %}
+          <video  width="320" height="240" preload="metadata" controls style="margin-top: 0;">  
+    
+          <source type="video/mp4" src="{{ mp4 }}" >   
+          <track src="{{ path }}{{ generatetext_with_extension }}" type="text/vtt" label="{{ language }}" kind="subtitles" srclang="{{ language }}" default>
+
+        </video>
+        {% endif %}
+    {% endfor %}
+  </div>
+  <div class="col-sm d-flex flex-column justify-content-center">
+    <p class="text-left" >
+    Téléchargement des fichiers
+   <br>
+      {% for generatetext_with_extension in generatetext_extension %}
+        {% set extension = generatetext_with_extension|split('.') %}
+        <a href="{{ path }}{{ generatetext_with_extension }}" download="{{ path }}{{ generatetext_with_extension }}">{{ extension[1] }}</a>
+      {% endfor %}
+      <a href="{{ mp4 }}" download="{{ mp4 }}">mp4</a>
+    </p>
+  </div>
+</div>
+<div class="row m-4">
+  <div class="col">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <input type="button" value="G" style="font-weight: bold;" onclick="commande('bold');" />
+        <input type="button" value="I" style="font-style: italic;" onclick="commande('italic');" />
+        <input type="button" value="S" style="text-decoration: underline;" onclick="commande('underline');" />
+        <div id="editeur" contentEditable style="width: 100%; height: 100%;">
+          {{ text|nl2br }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
